@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from dafq_web import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('', include('app.urls'))
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

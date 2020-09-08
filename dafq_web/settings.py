@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_3-l4a88a5t$i*xgm@ywwymk_^jv1^((qc0^dm(8s$n_9@r#l_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.43.93','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.43.93','daf-q.id']
 # SECURE_HSTS_SECONDS = True
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_CONTENT_TYPE_NOSNIFF = True
