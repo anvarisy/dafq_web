@@ -1,0 +1,206 @@
+{% extends 'Root.html'%}{%load static%} {%block navbar%} {%include 'Menu.html'%} {%endblock navbar%} {%block content%}
+<div class="section banner-page" data-background="{%static 'images/dafq.png'%}">
+    <div class="content-wrap pos-relative">
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+            <div class="title-page">{{item.title}}</div>
+        </div>
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item"><a href="{%url 'home'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- HOW TO HELP US -->
+{%for item in detail%}
+<div class="section">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <img src="{{item.photo}}" alt="" class="img-fluid">
+                </div>
+            </div>
+
+            <div class="spacer-90"></div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="color-secondary"><span class="color-primary">{{item.title}}</span></h2>
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+
+                    <p class="uk18 color-secondary">{{item.detail}}</p>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+
+                    <div class="spacer-30"></div>
+
+                    <div class="progress-fundraising progress-lg">
+                        <div class="total">Donated</div>
+                        <div class="persen">{{item.persen}}%</div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{item.persen}}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="detail">
+                            <h3>Rp {{item.collected}} <small>Terkumpul dari</small> Target <small>Rp {{item.target}}</small></h3>
+                        </div>
+                    </div>
+                    <form>
+                        {%csrf_token%} {% if user.is_authenticated %}
+                        <a href="javascript:;" id="donate" onclick="showDialog()" class="btn btn-primary">DONATE NOW</a> {%else%}
+                        <a href="javascript:;" id="donate" onclick="loginDulu()" class="btn btn-primary">DONATE NOW</a> {%endif%}
+                    </form>
+                </div>
+            </div>
+            <div class="spacer-90"></div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <div class="row popup-gallery gutter-5">
+                        <!-- ITEM 1 -->
+                        {%for photo in item.photos%}
+                        <div class="col-xs-6 col-md-3">
+                            <div class="box-gallery">
+                                <a href="{{photo}}" title="Gallery #1">
+                                    <img src="{{photo}}" alt="" class="img-fluid">
+                                    <div class="project-info">
+                                        <div class="project-icon">
+                                            <span class="fa fa-search"></span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {%endfor%}
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%} {%endblock content%}{%block footer%} {%include 'Footer.html'%} {%endblock footer%} {%block script%} {%for item in detail%}
+    <script>
+        let amount = 0
+
+        function loginDulu() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'Login dulu !',
+            })
+        }
+
+        function showDialog() {
+            Swal.fire({
+                text: 'Mau donasi berapa ?',
+                input: 'number'
+            }).then(function(result) {
+                if (result.value) {
+                    amount = result.value
+                        //console.log(makeid(10))
+                    requestPayment(amount)
+                }
+            })
+        }
+
+        function requestPayment(amount) {
+            $.ajax({
+                headers: {
+                    "X-CSRFToken": Cookies.get("csrftoken")
+                },
+                type: "POST",
+                url: "{% url 'donate' %}",
+                data: JSON.stringify({
+                    "transaction_details": {
+                        "order_id": makeid(10),
+                        "gross_amount": amount,
+                    },
+                    "credit_card": {
+                        "secure": 1
+                    },
+                    "item_details": [{
+                        "id": "{{item.id}}",
+                        "price": amount,
+                        "quantity": 1,
+                        "name": "{{item.detail}}",
+                        "merchant_name": "Yayasan Dompet Amal Fahim Quran"
+                    }],
+                    "customer_details": {
+                        "first_name": "{{user.first_name}}",
+                        "last_name": "",
+                        "email": "{{user.email}}",
+                        "phone": "{{user.last_name}}",
+                    }
+
+                }),
+
+                success: function(data) {
+                    let token = data['token']
+                    pay(token)
+                }
+            });
+        }
+
+        function pay(token) {
+            snap.pay(token, {
+                // Optional
+                onSuccess: function(result) {
+                    /* You may add your own js here, this is just example */
+                    console.log('OK')
+                    $.ajax({
+                        headers: {
+                            "X-CSRFToken": Cookies.get("csrftoken")
+                        },
+                        type: "POST",
+                        url: "{% url 'record' %}",
+                        data: {
+                            mis_id: '{{item.id}}',
+                            mis_name: '{{item.title}}',
+                            don_id: '{{user.username}}',
+                            don_name: '{{user.first_name}}',
+                            amount: amount
+                        },
+
+                        success: function(data) {
+
+                            if (data == "OK") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Selamat',
+                                    text: 'Donasi anda telah berhasil!',
+                                })
+
+                            }
+                        }
+                    });
+                },
+                // Optional
+                onPending: function(result) {
+                    /* You may add your own js here, this is just example */
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'Transaksi anda masih kepending !',
+                    })
+                },
+                // Optional
+                onError: function(result) {
+                    /* You may add your own js here, this is just example */
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Transaksi anda gagal !',
+                    })
+                }
+            });
+        }
+    </script>
+    {%endfor%} {%endblock script%}

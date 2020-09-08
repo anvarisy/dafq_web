@@ -1,0 +1,16 @@
+{
+    "type": "service_account",
+    "project_id": "pondok-f2805",
+    "projectId": "pondok-f2805",
+    "authDomain": "pondok-f2805.firebaseapp.com",
+    "apiKey": "AIzaSyDDkHZEyKkn4yR1XGAicHfaAsG7N3NpVCE",
+    "private_key_id": "b5db2276ee9acfa109002d4c41a30681fea887b4",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDM1V9Ybbo0LctX\nxpD1hTyyGjY/7iKsbSmhokqgLnVa8lUw/KWK0P5hWzL+qHe/NyG0bHwiZ5lf9xFB\nVEukltEVrEj0CYDw+rlhHFN2JNLT3EEMxT2gZ0MuWuV65PK3Skvd4/RECvLyHK2s\nVkWyxtRqsb6XnD88DsA+OC7CTpSBTJeVjXCRabryDu4NA7ILk4cfLIUbboafPqK3\nxohVThn4oFpX1z9b6sCcEDa3fUVEfvITAeLAZkgC6epxIwuVw6ZgSnvaAS+RYoVC\nWL6Mh/fSadyVrTtLoygsOX2InwO6OHwavJ2S2qmtV9OZxGIFa7lFmTjcsPN7aq1A\nyN/iYpBDAgMBAAECggEAK1U+iP4ZpN1FRen/k7leqE0MSgUOd8zWQFgNkoqRkC5x\nIF5qhQ4GqsD47k/kmWLH8hv7POoO0/L4RwpWwFiZngynGF2EVjasjiNIcteCdIiF\niHaXvX3rA/z9zDxwLp98olINxHFOiTLQ+QL9Vr9ig7nbmMZYyFNUjzUiiz/Fgf65\nsxmlCO07q/XsjnzjY433Qks5EVfdaUKszEtrNlLkNlc6WnOUyccS/tM7gTFvUoi7\nel0xnOxc7O/STaMKzrI93Gh03rtO3PuQc9P5lcGaL8Jbu+qX0QFgWToJc5Oj5r8O\nidyFpHE563x2D1X/AOYr9wzV279TlHue+9i0LNNaVQKBgQDn/kUiGghEKkR1pEgX\noLlEt185+O/xXmxBw9zNNh2yyItX8x6kIKDm6fOSw5pAatppTzxgANKE0OgmHox1\nSt97d5zVAeivNezZVqHhzv3YsnysZ32Xxd3/zq+vuklwYC546p4PYNpDwgB5lYwK\nr4s4Y/IaBtdQqRoTurxqXeJMTwKBgQDiB50Xt86wP1PrUJnQyXUt6hZVAxG7BRZ5\ndKSZmruM4O93tC8Y7kah7QJZqZZKLOgyZ6PedX+Vap+dZCHdgWNb1jxZUVkpfGuE\nb8OTnfPjCOjnkr8cvVqOV62Ol0fpjhKX2LeGHiecIH5GFn+zK5JdUJv13HwUeT0e\nz0Ztfob7zQKBgCNlMQkN7brws/c69GDefcXVMGs45urtnBjAmFya6BcR7+igSEmE\nTOhOQ4Jd45f2dZJhq3V+SqBG+1RtjsKKhORikIQTQXwR/yv9wr8gBKzeNpVbSNcy\nMjfIQhfOlUvW8OAz85+nCEYUQFxMi8xJkjUtUo/UAV/mHPtrnzmfT1qTAoGAAiGk\nP5cCIfNW7T8jVC6yJi6w6zhOMH9JyPdqnfAxmJB+cZiHYSrOC7TactIAks59mgwU\nJYLiIxyQSMGq+BXCRBlvFECKILQFp4gORhQVOqzY1WYy2yiF9BWrk06l5PPsBPaM\nNH2QTg6YYjzQE3ZzuOGLtvPPT7oc829s8Jdi2nkCgYEApmyBQ3eLt5o/sUY+E8q5\nwkEuDZTVfeFJajAU4citCyWp7JosnR63TV1RVOjJC+h6vqwjiRc6mncjdEsBoAJ7\ne3EhZtb07obJia5pPODXaDjUaflco893LM7Qx0H7xEO3deOxJ47RqYJ1v6inCwNf\nYebJm4UaZDiG+p8pLfUGzGg=\n-----END PRIVATE KEY-----\n",
+    "client_email": "firebase-adminsdk-6ahho@pondok-f2805.iam.gserviceaccount.com",
+    "client_id": "115287720007326689937",
+    "storageBucket": "pondok-f2805.appspot.com",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-6ahho%40pondok-f2805.iam.gserviceaccount.com"
+}

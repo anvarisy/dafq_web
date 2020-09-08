@@ -1,0 +1,80 @@
+{% load static %}
+
+<div class="animationload">
+    <div class="loader"></div>
+</div>
+
+<!-- BACK TO TOP SECTION -->
+<a href="#0" class="cd-top cd-is-visible cd-fade-out">Top</a>
+<!-- TOPBAR -->
+<div class="header header-3">
+
+    <!-- NAVBAR SECTION -->
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-6">
+                    <div class="info">
+                        <div class="info-item">
+                            <span class="fa fa-envelope-o"></span> <a href="mailto:info@daf-q.id" title=""><strong>Mail:</strong>info@daf-q.id</a>
+                        </div>
+                        <div class="info-item">
+                            <span class="fa fa-phone"></span><strong>Call Us:</strong> +62 816 1123 811
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-6">
+                    <div class="sosmed-icon pull-right">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/officialdafq/"><i class="fa fa-instagram"></i></a>
+                        <a href="https://wa.me/628161123811?text=Salam"><i class="fa fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar-main">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="#">
+                    <img src="{%static 'images/logo.png'%}" alt="" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'home'%}">HOME</a>
+                        </li>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              ABOUT
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{%url 'about'%}">Tentang Kami</a>
+                                <a class="dropdown-item" href="{%url 'our-team'%}">Team Kami</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'misi'%}">MISI KAMI</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'register'%}">REGISTER</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'news'%}">NEWS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'proposal'%}">AJUKAN MISI</a>
+                        </li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <a href="{%url 'logout'%}" class="btn btn-primary btn-nav ml-auto">LOGOUT</a> {%else%}
+                    <a href="{%url 'login'%}" class="btn btn-primary btn-nav ml-auto">LOGIN</a> {%endif%}
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

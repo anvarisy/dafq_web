@@ -1,0 +1,183 @@
+{% extends 'Root.html'%}{%load static%} {%block navbar%} {%include 'Menu.html'%} {%endblock navbar%} {%block content%}
+<!-- BANNER -->
+<div class="section banner-page" data-background="{%static 'images/dafq.png'%}">
+    <div class="content-wrap pos-relative">
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+            <div class="title-page">About Us</div>
+        </div>
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item"><a href="{%url 'home'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="section">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="section-heading">
+                        Selamat Datang <span>Di</span> DAFQ
+                    </h2>
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+                    {%for detail in profil%}
+                    <p>{{detail.profil_detail}}</p>
+                    {%endfor%}
+                    <div class="spacer-30"></div>
+                    <a href="{%url 'our-team'%}" class="btn btn-primary">Team Kami</a>
+                    <div class="spacer-30"></div>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+
+                    <div class="about-img">
+                        <div class="about-img-top">
+                            <div class="hover-img">
+                                <img src="{%static 'images/unnamed.jpg'%}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="about-img-bottom">
+                            <div class="hover-img">
+                                <img src="{%static 'images/unnamed2.jpg'%}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{%for detail in profil%}
+<!-- WHY CHOOSE US -->
+<div class="section">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="section-heading">
+                        Kenapa <span>Memilih</span> Kami
+                    </h2>
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+                    <p>Teritatis et quasi architecto. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo invent. Sed ut perspiciatis unde omnis iste natus error sit
+                        .
+                    </p>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/TM7xi-fn0Ko?autoplay=0&loop=0&showinfo=0&theme=dark&color=red&controls=1&modestbranding=0&start=0&fs=1&iv_load_policy=1"></iframe>
+
+                    </div>
+                    <div class="spacer-30"></div>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+
+
+                    <div class="accordion rs-accordion" id="accordionExample">
+                        <!-- Item 1 -->
+                        <div class="card mb-2">
+                            <div class="card-header" id="headingOne">
+                                <h4 class="title">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                             Kelebihan Kami
+                            </button>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Create and publilsh dynamic websites for desktop, tablet, and mobile devices that meet the latest web standards- without writing code. Design freely using familiar tools and hundreds of web fonts. easily add interactivity, including slide shows, forms,
+                                    and more.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="card mb-2">
+                            <div class="card-header" id="headingTwo">
+                                <h4 class="title">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              Visi
+                            </button>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    {{detail.profil_vision}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="card mb-2">
+                            <div class="card-header" id="headingThree">
+                                <h4 class="title">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                              Misi
+                            </button>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    {%for misi in detail.profil_mission%}
+                                    <p>{{misi}}</p>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{%endfor%}
+<style>
+    .pdfobject-container {
+        height: 50rem;
+        border: 1rem solid rgba(0, 0, 0, .1);
+    }
+</style>
+<div class="clearfix"></div>
+<div class="section services">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="section-heading">
+                        Term <span>&</span> Condition
+                    </h2>
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <div id="example1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.js"></script>
+</body>
+<script>
+    PDFObject.embed("{%static 'term.pdf'%}", "#example1");
+</script>
+{%endblock content%} {%block footer%} {%include 'Footer.html'%} {%endblock footer%}

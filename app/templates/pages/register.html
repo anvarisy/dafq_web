@@ -1,0 +1,165 @@
+{% extends 'Root.html'%}{%load static%} {%block navbar%} {%include 'Menu.html'%} {%endblock navbar%} {%block content%}
+<!-- BANNER -->
+<div class="section banner-page" data-background="{%static 'images/dafq.png'%}">
+    <div class="content-wrap pos-relative">
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+            <div class="title-page">FAQ</div>
+        </div>
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item"><a href="{%url 'home'%}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert {{ message.tags }}" {% endif %}>{{ message }}</div>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!-- HOW TO HELP US -->
+<div class="section">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="section-heading">
+                        How To <span>Help</span> Us
+                    </h2>
+                    <div class="section-subheading">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo invent.</div>
+                    <div class="margin-bottom-50"></div>
+                    <dl class="hiw">
+                        <dt><span class="fa fa-gift"></span></dt>
+                        <dd>
+                            <div class="no">01</div>
+                            <h3>Send Donation</h3>Teritatis et quasi architecto. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolore mque laudantium, totam rem aperiam, eaque ipsa quae ab illo invent.</dd>
+                        <dt><span class="fa fa-male"></span></dt>
+                        <dd>
+                            <div class="no">02</div>
+                            <h3>Become Volunteer</h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dd>
+                        <dt><span class="fa fa-bullhorn"></span></dt>
+                        <dd>
+                            <div class="no">03</div>
+                            <h3>Share Media</h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dd>
+
+                    </dl>
+                </div>
+                <div class="spacer-90"></div>
+                <div class="clearfix"></div>
+
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="section-heading">
+                        Daftarkan Diri <span>Anda</span>
+                    </h2>
+                    <div class="content">
+
+                        <form method="POST" action="{%url 'post-register'%}" onsubmit="return checkForm(this)" class="form-contact" data-toggle="validator" novalidate="true">
+                            {%csrf_token%}
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <input required type="text" class="form-control" name="full_name" placeholder="Enter Name" required="">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input required type="email" class="form-control" name="email" placeholder="Enter Email" required="">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input required type="phone" class="form-control" name="phone" placeholder="Enter Phone" required="">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input required type="password" class="form-control" name="pwd1" placeholder="password">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input required type="password" class="form-control" name="pwd2" placeholder="Retype Password">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                        <div class="margin-bottom-50"></div>
+                        <p><em>Note: Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</em></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock content%}{%block footer%} {%include 'Footer.html'%} {%endblock footer%} {%block script%}
+<script>
+    function checkForm(form) {
+        if (form.email.value == "") {
+            alert("Error: Email cannot be blank!");
+            form.username.focus();
+            return false;
+        }
+        /*re = /^\w+$/;
+        if(!re.test(form.username.value)) {
+          alert("Error: Username must contain only letters, numbers and underscores!");
+          form.username.focus();
+          return false;
+        } */
+
+        if (form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
+            if (form.pwd1.value.length < 6) {
+                alert("Error: Password must contain at least six characters!");
+                form.pwd1.focus();
+                return false;
+            }
+            if (form.pwd1.value == form.username.value) {
+                alert("Error: Password must be different from Email!");
+                form.pwd1.focus();
+                return false;
+            }
+            re = /[0-9]/;
+            if (!re.test(form.pwd1.value)) {
+                alert("Error: password must contain at least one number (0-9)!");
+                form.pwd1.focus();
+                return false;
+            }
+            re = /[a-z]/;
+            if (!re.test(form.pwd1.value)) {
+                alert("Error: password must contain at least one lowercase letter (a-z)!");
+                form.pwd1.focus();
+                return false;
+            }
+            re = /[A-Z]/;
+            if (!re.test(form.pwd1.value)) {
+                alert("Error: password must contain at least one uppercase letter (A-Z)!");
+                form.pwd1.focus();
+                return false;
+            }
+        } else {
+            alert("Error: Please check that you've entered and confirmed your password!");
+            form.pwd1.focus();
+            return false;
+        }
+
+        alert("You entered a valid password: " + form.pwd1.value);
+        return true;
+    }
+</script>
+{%endblock script%}

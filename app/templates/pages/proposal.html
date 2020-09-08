@@ -1,0 +1,220 @@
+{% extends 'Root.html'%}{%load static%} {%block navbar%} {%include 'Menu.html'%} {%endblock navbar%} {%block content%}
+
+<!-- BANNER -->
+<div class="section banner-page" data-background="{%static 'images/dafq.png'%}">
+    <div class="content-wrap pos-relative">
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+            <div class="title-page">Proposal</div>
+        </div>
+        <div class="d-flex justify-content-center bd-highlight mb-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Proposal</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert {{ message.tags }}" {% endif %}>{{ message }}</div>
+    {% endfor %}
+</ul>
+{% endif %}
+<!-- CONTENT -->
+<div class="section">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+
+                <div class="clearfix"></div>
+
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="section-heading">
+                        Ajukan <span>Misi</span>
+                    </h2>
+
+                    <div class="content">
+                        <form method="POST" action="{%url 'post-proposal'%}" onsubmit=" return checkForm(this)" class="form-contact" data-toggle="validator" novalidate="true">
+                            {%csrf_token%}
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6" hidden>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="uid" value="{{user.username}}" required="">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="full_name" value="{{user.first_name}}" placeholder="Enter Name" required="">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="city" placeholder="Enter City" required="">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" value="{{user.email}}" name="email" placeholder="Enter Email" required="">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <input type="phone" class="form-control" name="phone" maxlength="13" placeholder="Enter Phone" required="">
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label id="l_photo" for="files">Pas Photo</label>
+                                        <input type="text" class="form-control" id="u_photo" name="u_photo" required="" hidden>
+                                        <input type="file" class="form-control" id="photo" placeholder="">
+                                        <a target="_blank" id="a_photo" href="#">Check</a>
+                                        <div id="s_photo" class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <label id="l_card" for="files">Id Card</label>
+                                        <input type="text" class="form-control" id="u_card" name="u_card" required="" hidden>
+                                        <input type="file" class="form-control" id="card">
+                                        <a target="_blank" id="a_card" href="#">Check</a>
+                                        <div id="s_card" class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <label id="l_proposal" for="files">Proposal</label>
+                                        <input type="text" class="form-control" id="u_proposal" name="u_proposal" required="" hidden>
+                                        <input type="file" class="form-control" id="proposal">
+                                        <a target="_blank" id="a_proposal" href="#">Check</a>
+                                        <div id="s_proposal" class="spinner-border" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                        <div class="margin-bottom-50"></div>
+                        <p><em>Note: Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</em></p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{%endblock content%}{%block footer%} {%include 'Footer.html'%} {%endblock footer%} {%block script%}
+<script>
+    $('#s_photo').hide()
+    $('#s_card').hide()
+    $('#s_proposal').hide()
+    let photo
+    $('#photo').change(function(res) {
+        photo = $('#photo').get(0).files[0]
+        upload('Upload Photo selesai', 1, photo)
+    })
+    $('#card').change(function(res) {
+        card = $('#card').get(0).files[0]
+        upload('Upload Id Card selesai', 2, card)
+    })
+    $('#proposal').change(function(res) {
+        proposal = $('#proposal').get(0).files[0]
+        upload('Upload Id Card selesai', 3, proposal)
+    })
+
+    function checkForm(form) {
+        if (form.u_photo.value == "") {
+            alert("Error: Upload Photo!");
+            return false
+        }
+        if (form.u_card.value == "") {
+            alert("Error: Upload ID Card!");
+            return false
+        }
+        if (form.u_proposal.value == "") {
+            alert("Error: Upload Proposal!");
+            return false
+        }
+    }
+
+    function upload(message, code, file) {
+        var ref = firebase.storage().ref();
+        let uploadTask = ref.child('Proposal/' + '{{user.username}}' + '/' + file.name).put(file);
+        uploadTask.on('state_changed', function(snapshot) {
+                switch (code) {
+                    case 1:
+                        $('#s_photo').show()
+                        break
+                    case 2:
+                        $('#s_card').show()
+                        break
+                    case 3:
+                        $('#s_proposal').show()
+                        break
+                }
+                // Observe state change events such as progress, pause, and resume
+                // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log('Upload is ' + progress + '% done');
+
+                switch (snapshot.state) {
+                    case firebase.storage.TaskState.PAUSED: // or 'paused'
+                        console.log('Upload is paused');
+                        break;
+                    case firebase.storage.TaskState.RUNNING: // or 'running'
+                        console.log('Upload is running');
+                        break;
+                }
+            },
+            function(error) {
+                // Handle unsuccessful uploads
+            },
+            function() {
+                // Handle successful uploads on complete
+                // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                    console.log('File available at', downloadURL);
+                    alert(message)
+                    switch (code) {
+                        case 1:
+                            $('#s_photo').hide()
+                            $('#u_photo').val(downloadURL)
+                            $('#a_photo').attr('href', downloadURL)
+                            break
+                        case 2:
+                            $('#s_card').hide()
+                            $('#u_card').val(downloadURL)
+                            $('#a_card').attr('href', downloadURL)
+                            break
+                        case 3:
+                            $('#s_proposal').hide()
+                            $('#u_proposal').val(downloadURL)
+                            $('#a_proposal').attr('href', downloadURL)
+                            break
+                    }
+
+                });
+            });
+    }
+</script>
+
+{%endblock script%}

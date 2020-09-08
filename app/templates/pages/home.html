@@ -1,0 +1,172 @@
+{% extends 'Root.html'%}{%load static%} {%block navbar%} {%include 'Menu.html'%} {%endblock navbar%} {%block content%}
+<!-- BANNER -->
+
+<div id="oc-fullslider" class="banner owl-carousel">
+    {%for item in carousel%}
+    <div class="owl-slide">
+        <div class="item">
+            <img src="{{item.image}}" alt="Slider">
+            <div class="slider-pos">
+                <div class="container">
+                    <div class="wrap-caption">
+                        <!-- <h1 class="caption-heading bg">{{item.title}}</h1>
+                        <p class="bg">{{item.subtitle}}</p> -->
+                        <!-- <a href="#" class="btn btn-light">LEARN MORE</a>
+                        <a href="#" class="btn btn-primary">DONATE NOW</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+
+
+</div>
+
+<div class="clearfix"></div>
+
+
+<!-- WELCOME TO NGOO-->
+<div class="section">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="section-heading">
+                        Selamat Datang <span>Di</span> DAFQ
+                    </h2>
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+                    {%for detail in profil%}
+                    <p>{{detail.profil_detail}}</p>
+                    {%endfor%}
+                    <div class="spacer-30"></div>
+                    <a href="{%url 'our-team'%}" class="btn btn-primary">Team Kami</a>
+                    <div class="spacer-30"></div>
+
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+
+                    <div class="about-img">
+                        <div class="about-img-top">
+                            <div class="hover-img">
+                                <img src="{%static 'images/unnamed.jpg'%}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="about-img-bottom">
+                            <div class="hover-img">
+                                <img src="{%static 'images/unnamed2.jpg'%}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<!-- URGENT CAUSE -->
+{%if misi_penting is not None%}
+<div class="section" data-background="{{misi_penting.photo}}">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <h2 class="section-heading light">
+                        Misi <span>Prioritas</span>
+                    </h2>
+
+                    <h2 class="color-white"><span class="color-primary">{{misi_penting.title}}</h2>
+                    <p style="color: black;">
+                        {{misi_penting.subtitle}}
+                    </p>
+
+                    <div class="progress-fundraising progress-lg">
+                        <div class="total">Donated</div>
+                        <div class="persen color-white">{{misi_penting.persen}}%</div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{per_penting}}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="detail">
+                            <h3>Rp {{misi_penting.collected}} <small class="color-white">Terkumpul dari</small> Rp {{misi_penting.target}} <small class="color-white">Total</small></h3>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="col-sm-6 col-md-6">
+                    <div class="img-button">
+                        <img src="{{misi_penting.photos.0}}" alt="">
+                        <div class="btn-overlay">
+
+                            <a href="#" class="btn btn-primary">DONATE NOW</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{%else%}
+<div class="clearfix"></div>
+{%endif%}
+<div class="clearfix"></div>
+
+<!-- WE NEED YOUR HELP -->
+<div class="section services">
+    <div class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <h2 class="section-heading center">
+                        Kita <span>Butuh</span> Bantuan Anda
+                    </h2>
+                    <!-- <p class="subheading text-center">Lorem ipsum dolor sit amet, onsectetur adipiscing cons ectetur nulla. Sed at ullamcorper risus.</p> -->
+                </div>
+                <div class="clearfix"></div>
+                <!-- Item 1 -->
+                {%for item in misi%}
+                <div class="col-sm-4 col-md-4">
+                    <div class="box-fundraising">
+                        <div class="media">
+                            <img src="{{item.photo}}" alt="">
+                        </div>
+                        <div class="body-content">
+                            <p class="title"><a href="#">{{item.title}}</a></p>
+                            <div class="text">{{item.subtitle}}</div>
+                            <div class="progress-fundraising">
+                                <div class="total">Rp {{item.collected}}<span> Telah Terkumpul</span></div>
+                                <div class="persen">{{item.persen}}%</div>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{item.presen}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+                <div class="col-sm-12 col-md-12">
+                    <div class="spacer-50"></div>
+                    <div class="text-center">
+                        <a href="{%url 'misi'%}" class="btn btn-primary">Misi Lainnya</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- CTA -->
+
+{%endblock content%} {%block footer%} {%include 'Footer.html'%} {%endblock footer%}

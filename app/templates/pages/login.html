@@ -1,0 +1,59 @@
+{% extends 'Root.html'%}{%load static%} {%block navbar%} {%include 'Menu.html'%} {%endblock navbar%} {%block content%}
+<div class="clearfix"></div>
+<div id="firebaseui-auth-container"></div>
+<div id="loader">Loading...</div>
+<div class="clearfix"></div>
+{%endblock content%} {%block footer%} {%include 'Footer.html'%} {%endblock footer%} {%block script%}
+<script>
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    var uiConfig = {
+        callbacks: {
+            signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                // User successfully signed in.
+                // Return type determines whether we continue the redirect automatically
+                // or whether we leave that to developer to handle.
+                //console.log(authResult)
+                let uid = authResult.user.uid
+                $.ajax({
+                    headers: {
+                        "X-CSRFToken": Cookies.get("csrftoken")
+                    },
+                    type: "POST",
+                    url: "{% url 'post-login' %}",
+                    data: {
+                        uid: uid
+                    },
+                    success: function(data) {
+                        console.log(data)
+                        if (data == "OK") {
+                            console.log('Sukses')
+                            window.location.href = "{% url 'home'%}"
+                        } else {
+                            alert('Wrong username or password')
+                        }
+                    }
+                });
+
+                return true;
+            },
+            uiShown: function() {
+                // The widget is rendered.
+                // Hide the loader.
+                document.getElementById('loader').style.display = 'none';
+            }
+        },
+        // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+        signInFlow: 'popup',
+        signInSuccessUrl: '#',
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        // Terms of service url.
+        tosUrl: '#',
+        // Privacy policy url.
+        privacyPolicyUrl: '<your-privacy-policy-url>'
+    };
+    ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+{%endblock script%}

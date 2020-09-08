@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "12948175973",
+    "firebase_url": "https://pondok-f2805.firebaseio.com",
+    "project_id": "pondok-f2805",
+    "storage_bucket": "pondok-f2805.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12948175973:android:9384db1a3d6874f3695a8c",
+        "android_client_info": {
+          "package_name": "id.khwarizmi.qbsdonation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12948175973-ul5t0ukh8enhk8nvbqvifd48fi3f1lei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy5Z28oO2GgW-Itm-_g9gld4CdsGjeoXw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12948175973-ul5t0ukh8enhk8nvbqvifd48fi3f1lei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
