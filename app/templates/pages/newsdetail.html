@@ -39,7 +39,7 @@
 
                     <div class="spacer-30"></div>
 
-                    <p class="uk18 color-secondary">{{detail.detail}}</p>
+                    <p id="det" class="uk18 color-secondary">{{detail.detail}}</p>
                 </div>
 
 
@@ -49,4 +49,9 @@
     </div>
 </div>
 
-{%endblock content%}{%block footer%} {%include 'Footer.html'%} {%endblock footer%}
+{%endblock content%}{%block footer%} {%include 'Footer.html'%} {%endblock footer%} {%block script%}
+<script>
+    var rep = $('#det').html().replace(/\/n /g, "<br/>")
+    $('#det').html(rep)
+</script>
+{%endblock script%}

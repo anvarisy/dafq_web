@@ -53,11 +53,13 @@
                             <h3>Rp {{item.collected}} <small>Terkumpul dari</small> Target <small>Rp {{item.target}}</small></h3>
                         </div>
                     </div>
+                    <a href="javascript:;" id="donate" onclick="loginDulu()" class="btn btn-primary">DONATE NOW</a> {%comment%}
                     <form>
                         {%csrf_token%} {% if user.is_authenticated %}
                         <a href="javascript:;" id="donate" onclick="showDialog()" class="btn btn-primary">DONATE NOW</a> {%else%}
                         <a href="javascript:;" id="donate" onclick="loginDulu()" class="btn btn-primary">DONATE NOW</a> {%endif%}
                     </form>
+                    {%endcomment%}
                 </div>
             </div>
             <div class="spacer-90"></div>
@@ -94,7 +96,7 @@
             Swal.fire({
                 icon: 'warning',
                 title: 'Oops...',
-                text: 'Login dulu !',
+                text: 'Link akan diupdate segera',
             })
         }
 
@@ -130,7 +132,7 @@
                         "id": "{{item.id}}",
                         "price": amount,
                         "quantity": 1,
-                        "name": "{{item.detail}}",
+                        "name": "{{item.detail}}".substring(0, 40),
                         "merchant_name": "Yayasan Dompet Amal Fahim Quran"
                     }],
                     "customer_details": {
@@ -144,6 +146,7 @@
 
                 success: function(data) {
                     let token = data['token']
+                    console.log(token)
                     pay(token)
                 }
             });

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
-from firebase_admin import auth
+from firebase_admin import auth, firestore
 from django.views import View
 from app.__firebase__ import db
 from django.http import JsonResponse
@@ -40,10 +40,13 @@ class ViewHomePage(View):
             info = (item_misi.to_dict()['detail'][:80] + '..') if len(item_misi.to_dict()['detail']) > 75 else item_misi.to_dict()['detail']
             dict_['subtitle'] = info
             don_ = []
-            ref_donation = db.collection('Donations').where('mis_id','==',item_misi.id)
+            ref_donation = db.collection('s-transactions').where('mis_id','==',item_misi.id)
             data_donation = ref_donation.stream()
             for i_donation in data_donation:
-                don_.append(i_donation.to_dict()['amount'])
+                try :
+                    don_.append(float(i_donation.to_dict()['gross_amount']))
+                except :
+                    don_.append(0)
             total = sum(don_)
             dict_['col'] = total
             dict_['persen']= round((total/float(item_misi.to_dict()['target'])*100),4)
@@ -73,7 +76,14 @@ class ViewAbout(View):
 class ViewTeam(View):
     template = 'pages/team.html'
     def get(self, request):
-        return render(request,self.template,{'title':'Team'})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+        data = db.collection('Team').order_by(
+    'pos', direction=firestore.Query.ASCENDING).stream()
+        list_ = []
+        for item in data:
+            dict_ = item.to_dict()
+            dict_['id'] = item.id
+            list_.append(dict_)
+        return render(request,self.template,{'title':'Team','data':list_})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 
 class ViewRegister(View):
@@ -93,10 +103,13 @@ class ViewMisi(View):
             info = (item_misi.to_dict()['detail'][:80] + '..') if len(item_misi.to_dict()['detail']) > 75 else item_misi.to_dict()['detail']
             dict_['subtitle'] = info
             don_ = []
-            ref_donation = db.collection('Donations').where('mis_id','==',item_misi.id)
+            ref_donation = db.collection('s-transactions').where('mis_id','==',item_misi.id)
             data_donation = ref_donation.stream()
             for i_donation in data_donation:
-                don_.append(float(i_donation.to_dict()['amount']))
+                try :
+                    don_.append(float(i_donation.to_dict()['gross_amount']))
+                except :
+                    don_.append(0)
             total = sum(don_)
             dict_['col'] = total
             dict_['persen']= round((total/float(item_misi.to_dict()['target'])*100),4)
@@ -115,10 +128,13 @@ class DetailMisi(View):
         dict_= data_misi.to_dict()
         dict_['id'] = data_misi.id
         don_ = []
-        ref_donation = db.collection('Donations').where('mis_id','==',data_misi.id)
+        ref_donation = db.collection('s-transactions').where('mis_id','==',data_misi.id)
         data_donation = ref_donation.stream()
         for i_donation in data_donation:
-            don_.append(i_donation.to_dict()['amount'])
+                try :
+                    don_.append(float(i_donation.to_dict()['gross_amount']))
+                except :
+                    don_.append(0)
         total = sum(don_)
         dict_['col'] = total
         dict_['persen']= round((total/float(data_misi.to_dict()['target'])*100),4)
@@ -130,7 +146,7 @@ class DetailMisi(View):
 class ViewNews(View):
     template = 'pages/news.html'
     def get(self, request):
-        ref_article = db.collection('Article')
+        ref_article = db.collection('Article-Web')
         data_article = ref_article.stream()
         l_article = []
         for article in data_article:
@@ -144,11 +160,11 @@ class ViewNews(View):
 class DetailNews(View):
     template = 'pages/newsdetail.html'
     def get(self, request, news_id):
-        ref_new = db.collection('Article').document(news_id)
+        ref_new = db.collection('Article-Web').document(news_id)
         data_new = ref_new.get()
         return  render(request, self.template,{'title':'Detail', 'detail':data_new.to_dict()})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-class ViewProposal(LoginRequiredMixin,View):
+class ViewProposal(View):
     template = 'pages/proposal.html'
     def get(self, request):
         return render(request, self.template,{'title':'Proposal'})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
@@ -214,7 +230,7 @@ class ViewSuccess(View):
     def get(self, request):
         return render(request, self.template)
 
-class PostProposal(LoginRequiredMixin,View):
+class PostProposal(View):
     template = 'pages/proposal.html'
     def post(self, request):
         uid = request.POST['uid']
@@ -245,7 +261,7 @@ class PostProposal(LoginRequiredMixin,View):
             messages.error(request,'Terjadi masalah di server mohon hubingi admin')
         return render(request, self.template,{'title':'Proposal'})
 
-class HandlePayment(LoginRequiredMixin, View):
+class HandlePayment(View):
     def post(self, request):
         snap = midtransclient.Snap(
         is_production=True,
@@ -256,7 +272,7 @@ class HandlePayment(LoginRequiredMixin, View):
         transaction = snap.create_transaction(body)
         return JsonResponse(transaction, safe=False)
 
-class HandleRecord(LoginRequiredMixin, View):
+class HandleRecord(View):
     def post(self, request):
         don_id = request.POST['don_id']
         amount = request.POST['amount']

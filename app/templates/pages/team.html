@@ -17,131 +17,27 @@
 </div>
 
 <!-- HOW TO HELP US -->
-<!-- <div class="section">
+<div class="section">
     <div class="content-wrap">
         <div class="container">
             <div class="row">
 
+                {%for item in data%}
                 <div class="col-sm-3 col-md-3">
                     <div class="rs-team-1">
-                        <div class="media"><img src="{% static 'images/dummy-img-400x400.jpg'%}" alt=""></div>
+                        <div class="media"><img src="{{item.photo}}" alt=""></div>
                         <div class="body">
-                            <div class="title">Oliver Doel</div>
-                            <div class="position">CEO & Founder</div>
+                            <div class="title">{{item.name}}</div>
+                            <div class="position">{{item.position}}</div>
                             <ul class="social-icon">
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
+                                <li><a href="{{item.fb}}"><span class="fa fa-facebook"></span></a></li>
+                                <li><a href="https://wa.me/{{item.wa}}"><span class="fa fa-whatsapp"></span></a></li>
+                                <li><a href="{{item.ig}}"><span class="fa fa-instagram"></span></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-sm-3 col-md-3">
-                    <div class="rs-team-1">
-                        <div class="media"><img src="{% static 'images/dummy-img-400x400.jpg'%}" alt=""></div>
-                        <div class="body">
-                            <div class="title">Ella Doel</div>
-                            <div class="position">Lawyer</div>
-                            <ul class="social-icon">
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-md-3">
-                    <div class="rs-team-1">
-                        <div class="media"><img src="{% static 'images/dummy-img-400x400.jpg'%}" alt=""></div>
-                        <div class="body">
-                            <div class="title">Benn Doel</div>
-                            <div class="position">EO</div>
-                            <ul class="social-icon">
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-md-3">
-                    <div class="rs-team-1">
-                        <div class="media"><img src="{% static 'images/dummy-img-400x400.jpg'%}" alt=""></div>
-                        <div class="body">
-                            <div class="title">George Doel</div>
-                            <div class="position">EO</div>
-                            <ul class="social-icon">
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-md-3">
-                    <div class="rs-team-1">
-                        <div class="media"><img src="{% static 'images/dummy-img-400x400.jpg'%}" alt=""></div>
-                        <div class="body">
-                            <div class="title">Melissa Doel</div>
-                            <div class="position">Reporter</div>
-                            <ul class="social-icon">
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-md-3">
-                    <div class="rs-team-1">
-                        <div class="media"><img src="{% static 'images/dummy-img-400x400.jpg'%}" alt=""></div>
-                        <div class="body">
-                            <div class="title">Denisa Doel</div>
-                            <div class="position">Secretary</div>
-                            <ul class="social-icon">
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-md-3">
-                    <div class="rs-team-1">
-                        <div class="media"><img src="{% static 'images/dummy-img-400x400.jpg'%}" alt=""></div>
-                        <div class="body">
-                            <div class="title">Ronaldo Doel</div>
-                            <div class="position">Creative Team</div>
-                            <ul class="social-icon">
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-3 col-md-3">
-                    <div class="rs-team-1">
-                        <div class="media"><img src="{% static 'images/dummy-img-400x400.jpg'%}" alt=""></div>
-                        <div class="body">
-                            <div class="title">Hudson Doel</div>
-                            <div class="position">Voluunter Team</div>
-                            <ul class="social-icon">
-                                <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                                <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                                <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+                {%endfor%}
 
             </div>
 
@@ -159,5 +55,6 @@
 
         </div>
     </div>
-</div> -->
+</div>
+
 {%endblock content%} {%block footer%} {%include 'Footer.html'%} {%endblock footer%}

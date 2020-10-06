@@ -40,7 +40,7 @@
                                                 <p class="title"><a href="{%url 'detail' mis_id=item.id%}">{{item.title}}</a></p>
                                                 <div class="text">{{item.subtitle}}</div>
                                                 <div class="progress-fundraising">
-                                                    <div class="total">Rp {{item.collected}}</div>
+                                                    <div class="total">Rp{{item.target}}</div>
                                                     <div class="persen">{{item.persen}}%</div>
                                                     <div class="progress">
                                                         <div class="progress-bar" role="progressbar" aria-valuenow="{{item.persen}}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -69,4 +69,4 @@
         </div>
     </div>
 </div>
-{%endblock content%} {%block footer%} {%include 'Footer.html'%} {%endblock footer%}
+{%endblock content%} {%block footer%} {%include 'Footer.html'%} {%endblock footer%} {%block script%} {%endblock script%}

@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_3-l4a88a5t$i*xgm@ywwymk_^jv1^((qc0^dm(8s$n_9@r#l_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.43.93','daf-q.id']
+ALLOWED_HOSTS = ['daf-q.id','127.0.0.1']
 # SECURE_HSTS_SECONDS = True
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -132,7 +132,8 @@ MESSAGE_TAGS = {
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/home/static/'
+# STATIC_URL = '/static/'
 LOGIN_URL = '/login'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),)

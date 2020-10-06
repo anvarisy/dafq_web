@@ -93,7 +93,7 @@
                             <div class="progress-bar" role="progressbar" aria-valuenow="{{per_penting}}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <div class="detail">
-                            <h3>Rp {{misi_penting.collected}} <small class="color-white">Terkumpul dari</small> Rp {{misi_penting.target}} <small class="color-white">Total</small></h3>
+                            <h3>Rp {{misi_penting.target}}</h3>
                         </div>
                     </div>
 
@@ -139,10 +139,10 @@
                             <img src="{{item.photo}}" alt="">
                         </div>
                         <div class="body-content">
-                            <p class="title"><a href="#">{{item.title}}</a></p>
+                            <p class="title"><a href="{%url 'detail' mis_id=item.id%}">{{item.title}}</a></p>
                             <div class="text">{{item.subtitle}}</div>
                             <div class="progress-fundraising">
-                                <div class="total">Rp {{item.collected}}</div>
+                                <div class="total">Rp {{item.target}}</div>
                                 <div class="persen">{{item.persen}}%</div>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="{{item.presen}}" aria-valuemin="0" aria-valuemax="100"></div>

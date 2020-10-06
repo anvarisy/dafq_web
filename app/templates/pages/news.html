@@ -35,7 +35,7 @@
                             <div class="meta">
                                 <span class="date"><i class="fa fa-clock-o"></i>  {{item.date}}</span>
                             </div>
-                            <div class="text">{{item.subtitle}}</div>
+                            <div id="det" class="text">{{item.subtitle}}</div>
                             <div class="spacer-30"></div>
                             <a href="{%url 'new' news_id=item.id%}" class="btn btn-primary">READ MORE</a>
                         </div>
@@ -47,4 +47,9 @@
         </div>
     </div>
 </div>
-{%endblock content%}{%block footer%} {%include 'Footer.html'%} {%endblock footer%}
+{%endblock content%}{%block footer%} {%include 'Footer.html'%} {%endblock footer%} {%block script%}
+<script>
+    var rep = $('#det').html().replace(/\/n /g, "<br/>")
+    $('#det').html(rep)
+</script>
+{%endblock script%}

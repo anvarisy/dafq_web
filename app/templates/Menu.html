@@ -38,7 +38,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="#">
-                    <img src="{%static 'images/logo.png'%}" alt="" />
+                    <img src="{%static 'images/dafq.png'%}" alt="" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -70,9 +70,6 @@
                             <a class="nav-link" href="{%url 'proposal'%}">AJUKAN MISI</a>
                         </li>
                     </ul>
-                    {% if user.is_authenticated %}
-                    <a href="{%url 'logout'%}" class="btn btn-primary btn-nav ml-auto">LOGOUT</a> {%else%}
-                    <a href="{%url 'login'%}" class="btn btn-primary btn-nav ml-auto">LOGIN</a> {%endif%}
                 </div>
             </nav>
         </div>
